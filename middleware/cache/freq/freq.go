@@ -11,7 +11,7 @@ type Freq struct {
 	hits int
 }
 
-func NewFreq(t time.Time) *Freq {
+func New(t time.Time) *Freq {
 	return &Freq{last: t, hits: 0}
 }
 
