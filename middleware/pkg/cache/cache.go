@@ -45,7 +45,7 @@ func (c *Cache) Evict() {
 	defer c.Unlock()
 
 	key := ""
-	for k, _ := range c.items {
+	for k := range c.items {
 		key = k
 		break
 	}
