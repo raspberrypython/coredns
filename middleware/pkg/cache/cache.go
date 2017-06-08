@@ -18,9 +18,9 @@ type Cache struct {
 // New returns a new cache with the specified size.
 func New(size int) *Cache { return &Cache{items: make(map[string]interface{}), size: size} }
 
-// Inserts element indexed by key into the cache. Any existing
+// Add element indexed by key into the cache. Any existing
 // element is overwritten
-func (c *Cache) Insert(key string, el interface{}) {
+func (c *Cache) Add(key string, el interface{}) {
 	l := c.Len()
 	if l+1 > c.size {
 		c.Evict()
@@ -56,7 +56,8 @@ func (c *Cache) Evict() {
 	delete(c.items, key)
 }
 
-func (c *Cache) Lookup(key string) (interface{}, bool) {
+// Get looks up the element indexed under key.
+func (c *Cache) Get(key string) (interface{}, bool) {
 	c.RLock()
 	defer c.RUnlock()
 
