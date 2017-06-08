@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/coredns/coredns/middleware"
+	"github.com/coredns/coredns/middleware/pkg/cache"
 	"github.com/coredns/coredns/middleware/pkg/response"
 
-	"github.com/hashicorp/golang-lru"
 	"github.com/miekg/dns"
 )
 
@@ -20,11 +20,11 @@ type Cache struct {
 	Next  middleware.Handler
 	Zones []string
 
-	ncache *lru.Cache
+	ncache *cache.Cache
 	ncap   int
 	nttl   time.Duration
 
-	pcache *lru.Cache
+	pcache *cache.Cache
 	pcap   int
 	pttl   time.Duration
 }

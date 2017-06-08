@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"github.com/coredns/coredns/middleware"
+	"github.com/coredns/coredns/middleware/pkg/cache"
 	"github.com/coredns/coredns/middleware/pkg/response"
 	"github.com/coredns/coredns/middleware/pkg/singleflight"
 	"github.com/coredns/coredns/request"
 
-	"github.com/hashicorp/golang-lru"
 	"github.com/miekg/dns"
 )
 
@@ -21,15 +21,15 @@ type Dnssec struct {
 	zones    []string
 	keys     []*DNSKEY
 	inflight *singleflight.Group
-	cache    *lru.Cache
+	cache    *cache.Cache
 }
 
 // New returns a new Dnssec.
-func New(zones []string, keys []*DNSKEY, next middleware.Handler, cache *lru.Cache) Dnssec {
+func New(zones []string, keys []*DNSKEY, next middleware.Handler, c *cache.Cache) Dnssec {
 	return Dnssec{Next: next,
 		zones:    zones,
 		keys:     keys,
-		cache:    cache,
+		cache:    c,
 		inflight: new(singleflight.Group),
 	}
 }
