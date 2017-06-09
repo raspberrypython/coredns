@@ -223,7 +223,7 @@ func setCPU(cpu string) error {
 var (
 	conf    string
 	cpu     string
-	logfile string
+	logfile bool
 	version bool
 	plugins bool
 )
